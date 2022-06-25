@@ -57,7 +57,7 @@ export class Tweet extends React.PureComponent {
     };
 
     fmt_all = (id, string) => {
-        return string.split(/((?:^|\s)(?:https\:\/\/[^\s]+|#[a-z\d-]+))/gi).filter(Boolean).map((v, i) => {
+        return string.split(/((?:^|\s)(?:https\:\/\/[^\s]+|#[a-z\d-]+|\@[^\s]+))/gi).filter(Boolean).map((v, i) => {
             if (v.includes('https://')) {
                 return (
                     <TouchableOpacity
@@ -84,8 +84,45 @@ export class Tweet extends React.PureComponent {
                         <Text style={styles.feedItemTextTag}>{v}</Text>
                     </TouchableOpacity>
                 );
-            } else {
+            } else if (v.includes('@')) {
+                return (
+                    <TouchableOpacity
+                        style={styles.feedItemTextLinkContainer}
+                        activeOpacity={0.8}
+                        key={id + "at" + i}
+                        onPress={() => this.goToProfile(v)}
+                    >
+                        <Text style={styles.feedItemTextLink}>{v}</Text>
+                    </TouchableOpacity>
+                );
+            }
+            
+            else {
                 return <Text key={id + "link" + i}>{v}</Text>;
+            }
+        });
+    };
+
+    async goToProfile(username) {
+        const name = username.replace('@', '');
+
+        await fetch(this.url + "user_by_username/" + name, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(res => {
+            if (res.status == 200) {
+                return res.json();
+            }else {
+                return 0;
+            }
+        }).then(res => {
+            if (res != 0) {
+                this.navigation.navigate("Profile", {
+                    userdata: res,
+                    profile: res.suid,
+                });
             }
         });
     };

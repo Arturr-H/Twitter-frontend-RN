@@ -101,7 +101,7 @@ export default class Login extends React.PureComponent {
 				<View style={styles.bottomView}>
 					{/*- Email input -*/}
 					<TextInput
-						style                = {styles.input}
+						style                = {[styles.input, { marginBottom: 20 }]}
 						placeholder          = {"Email"}
 						placeholderTextColor = {stylevar.text.placeholder}
 						autoCapitalize       = {"none"}
@@ -119,7 +119,7 @@ export default class Login extends React.PureComponent {
 
 					{/*- Password input -*/}
 					<TextInput
-						style                = {styles.input}
+						style                = {[styles.input, { marginBottom: 20 }]}
 						placeholder          = {"Password"}
 						placeholderTextColor = {stylevar.text.placeholder}
 						autoCapitalize       = {"none"}

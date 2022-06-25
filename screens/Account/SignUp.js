@@ -94,116 +94,120 @@ export default class SignUp extends React.PureComponent {
 
 	render() {
 		return (
-			<KeyboardAvoidingView behavior="position" style={styles.accountContainer}>
-				<View style={styles.logoContainer}>
-					<Image source={require("../../assets/images/icon.png")} style={styles.logo} />
-				</View>
+			<View style={styles.wrapper}>
+				{/* <Image source={require("../../assets/images/background.jpg")} style={styles.background} /> */}
+				<KeyboardAvoidingView behavior="position" style={styles.accountContainer}>
+					<View style={styles.logoContainer}>
+						<Image source={require("../../assets/images/icon.png")} style={styles.logo} />
+					</View>
 
-				{/*- Dodge the built-in keyboard -*/}
-				<View style={styles.bottomViewLarge}>
-					{/*- Username input -*/}
-					<TextInput
-						style                = {styles.input}
-						placeholder          = {"Name..."}
-						placeholderTextColor = {stylevar.text.placeholder}
-						autoCapitalize       = {"none"}
-						autoComplete         = {"username"}
-						autoCorrect          = {false}
-						spellCheck           = {false}
-						keyboardType         = {"default"}
-						returnKeyType        = {"next"}
-						onSubmitEditing      = {() => this.inputDisplaynameRef.current.focus()}
-						onChangeText         = {(text) => this.setState({ username: text })}
-						value                = {this.state.username}
-						ref                  = {this.inputNameRef}
-						blurOnSubmit		 = {false}
-					/>
 
-					{/*- Displayname input -*/}
-					<TextInput
-						style                = {styles.input}
-						placeholder          = {"Displayname..."}
-						placeholderTextColor = {stylevar.text.placeholder}
-						autoCapitalize       = {"none"}
-						autoComplete         = {"name"}
-						autoCorrect          = {false}
-						spellCheck           = {false}
-						keyboardType         = {"default"}
-						returnKeyType        = {"next"}
-						onSubmitEditing      = {() => this.inputEmailRef.current.focus()}
-						onChangeText         = {(text) => this.setState({ displayname: text })}
-						value                = {this.state.displayname}
-						ref                  = {this.inputDisplaynameRef}
-						blurOnSubmit		 = {false}
-					/>
+					{/*- Dodge the built-in keyboard -*/}
+					<View style={styles.bottomViewLarge}>
+						{/*- Username input -*/}
+						<TextInput
+							style                = {styles.input}
+							placeholder          = {"Name..."}
+							placeholderTextColor = {stylevar.text.placeholder}
+							autoCapitalize       = {"none"}
+							autoComplete         = {"username"}
+							autoCorrect          = {false}
+							spellCheck           = {false}
+							keyboardType         = {"default"}
+							returnKeyType        = {"next"}
+							onSubmitEditing      = {() => this.inputDisplaynameRef.current.focus()}
+							onChangeText         = {(text) => this.setState({ username: text })}
+							value                = {this.state.username}
+							ref                  = {this.inputNameRef}
+							blurOnSubmit		 = {false}
+						/>
+
+						{/*- Displayname input -*/}
+						<TextInput
+							style                = {styles.input}
+							placeholder          = {"Displayname..."}
+							placeholderTextColor = {stylevar.text.placeholder}
+							autoCapitalize       = {"none"}
+							autoComplete         = {"name"}
+							autoCorrect          = {false}
+							spellCheck           = {false}
+							keyboardType         = {"default"}
+							returnKeyType        = {"next"}
+							onSubmitEditing      = {() => this.inputEmailRef.current.focus()}
+							onChangeText         = {(text) => this.setState({ displayname: text })}
+							value                = {this.state.displayname}
+							ref                  = {this.inputDisplaynameRef}
+							blurOnSubmit		 = {false}
+						/>
+						
+						{/*- Email input -*/}
+						<TextInput
+							style                = {styles.input}
+							placeholder          = {"Email..."}
+							placeholderTextColor = {stylevar.text.placeholder}
+							autoCapitalize       = {"none"}
+							autoComplete         = {"email"}
+							autoCorrect          = {false}
+							spellCheck           = {false}
+							keyboardType         = {"email-address"}
+							returnKeyType        = {"next"}
+							onSubmitEditing      = {() => this.inputPasswordRef.current.focus()}
+							onChangeText         = {(text) => this.setState({ email: text })}
+							value                = {this.state.email}
+							ref                  = {this.inputEmailRef}
+							blurOnSubmit		 = {false}
+						/>
+
+						{/*- Password input -*/}
+						<TextInput
+							style                = {styles.input}
+							placeholder          = {"Password..."}
+							placeholderTextColor = {stylevar.text.placeholder}
+							autoCapitalize       = {"none"}
+							autoComplete         = {"password"}
+							autoCorrect          = {false}
+							spellCheck           = {false}
+							keyboardType         = {"default"}
+							returnKeyType        = {"next"}
+							secureTextEntry      = {true}
+							onChangeText         = {(text) => this.setState({ password: text })}
+							value                = {this.state.password}
+							ref                  = {this.inputPasswordRef}
+							blurOnSubmit		 = {false}
+						/>
+
+						{/*- Confirm password input -*/}
+						<TextInput
+							style                = {styles.input}
+							placeholder          = {"Confirm password..."}
+							placeholderTextColor = {stylevar.text.placeholder}
+							autoCapitalize       = {"none"}
+							autoComplete         = {"password"}
+							autoCorrect          = {false}
+							spellCheck           = {false}
+							keyboardType         = {"default"}
+							returnKeyType        = {"done"}
+							secureTextEntry      = {true}
+							onChangeText         = {(text) => this.setState({ confirmPassword: text })}
+							value                = {this.state.confirmPassword}
+							ref                  = {this.inputConfirmPasswordRef}
+							blurOnSubmit		 = {false}
+						/>
+
+						{}
+
+						<Button onPress={this.signup}>
+							{
+								this.state.loading
+									? <ActivityIndicator />
+									: "Sign Up"
+							}
+						</Button>
+					</View>
 					
-					{/*- Email input -*/}
-					<TextInput
-						style                = {styles.input}
-						placeholder          = {"Email..."}
-						placeholderTextColor = {stylevar.text.placeholder}
-						autoCapitalize       = {"none"}
-						autoComplete         = {"email"}
-						autoCorrect          = {false}
-						spellCheck           = {false}
-						keyboardType         = {"email-address"}
-						returnKeyType        = {"next"}
-						onSubmitEditing      = {() => this.inputPasswordRef.current.focus()}
-						onChangeText         = {(text) => this.setState({ email: text })}
-						value                = {this.state.email}
-						ref                  = {this.inputEmailRef}
-						blurOnSubmit		 = {false}
-					/>
-
-					{/*- Password input -*/}
-					<TextInput
-						style                = {styles.input}
-						placeholder          = {"Password..."}
-						placeholderTextColor = {stylevar.text.placeholder}
-						autoCapitalize       = {"none"}
-						autoComplete         = {"password"}
-						autoCorrect          = {false}
-						spellCheck           = {false}
-						keyboardType         = {"default"}
-						returnKeyType        = {"next"}
-						secureTextEntry      = {true}
-						onChangeText         = {(text) => this.setState({ password: text })}
-						value                = {this.state.password}
-						ref                  = {this.inputPasswordRef}
-						blurOnSubmit		 = {false}
-					/>
-
-					{/*- Confirm password input -*/}
-					<TextInput
-						style                = {styles.input}
-						placeholder          = {"Confirm password..."}
-						placeholderTextColor = {stylevar.text.placeholder}
-						autoCapitalize       = {"none"}
-						autoComplete         = {"password"}
-						autoCorrect          = {false}
-						spellCheck           = {false}
-						keyboardType         = {"default"}
-						returnKeyType        = {"done"}
-						secureTextEntry      = {true}
-						onChangeText         = {(text) => this.setState({ confirmPassword: text })}
-						value                = {this.state.confirmPassword}
-						ref                  = {this.inputConfirmPasswordRef}
-						blurOnSubmit		 = {false}
-					/>
-
-					{}
-
-					<Button onPress={this.signup}>
-						{
-							this.state.loading
-								? <ActivityIndicator />
-								: "Sign Up"
-						}
-					</Button>
-				</View>
-				
-				<StatusBar style={statusbar} />
-			</KeyboardAvoidingView>
+					<StatusBar style={statusbar} />
+				</KeyboardAvoidingView>
+			</View>
 		);
 	}
-}
+};

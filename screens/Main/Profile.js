@@ -3,7 +3,9 @@ import { View, Image, SafeAreaView, Text } from "react-native";
 import { styles as style } from "../../Style";
 import { ServerHandler } from "../../func/ServerHandler";
 import { SharedElement } from "react-navigation-shared-element";
-import { ComposeButton } from "../../components/AtomBundle";
+import { ComposeButton, H3 } from "../../components/AtomBundle";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Feed from "../../components/molecules/Feed";
 
 /*- Home styles lies here -*/
 const styles = style.profile;
@@ -15,7 +17,7 @@ export default class Profile extends React.PureComponent {
 		super(props);
 		
 		/*- Function bindings -*/
-
+		this.fetchTweets = this.fetchTweets.bind(this);
 
 		/*- Statics -*/
 		this.mounted = false;
@@ -25,13 +27,30 @@ export default class Profile extends React.PureComponent {
 
 		/*- Changeable -*/
 		this.state = {
+			tweets: [],
 		};
 	};
-
 
 	/*- Init -*/
 	componentDidMount() { this.mounted = true; };
 	componentWillUnmount() { this.mounted = false; };
+	
+	/*- Fetch the tweets -*/
+	async fetchTweets() {
+		const server_response = await fetch(this.url + "user_tweets", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"user": this.userdata.suid,
+			},
+		});
+
+		/*- Get the json data -*/
+		const server_response_json = await server_response.json();
+
+		/*- Return the feed -*/
+		return server_response_json;
+	};
 
 	render() {
 		/*- Get the navigation handler -*/
@@ -49,7 +68,16 @@ export default class Profile extends React.PureComponent {
 					</View>
 				</SafeAreaView>
 
-				<SharedElement id="SharedComposeButton">
+				<View style={styles.feedWrapper}>
+					<H3>@{this.userdata.username}'s tweets:</H3>
+					<Feed
+						navigation={navigation}
+						override={true}
+						override_fetch_content={this.fetchTweets}
+					/>
+				</View>
+
+				<SharedElement id="SharedComposeButton" style={{position: "absolute", bottom: 0}}>
 					<ComposeButton absolute={true} icon="home" onPress={() => navigation.navigate("Home")} />
 				</SharedElement>
 			</View>

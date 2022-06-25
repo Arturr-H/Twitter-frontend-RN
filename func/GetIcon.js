@@ -4,6 +4,7 @@ export const icons = {
             explore: require("../assets/icons-white-72/Discovery.png"),
             home   : require("../assets/icons-white-72/Home.png"),
             search : require("../assets/icons-white-72/Search.png"),
+            left : require("../assets/icons-white-72/Left.png"),
         },
         filled: {
             arrow  : require("../assets/icons-white-72/Arrow.png"),

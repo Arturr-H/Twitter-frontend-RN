@@ -200,6 +200,22 @@ const styles = {
 			width: REM(10),
 			height: REM(10),
 		},
+
+		background: {
+			position: "absolute",
+			width: "100%",
+
+			left: 0,
+			top: 0,
+
+			zIndex: 1
+		},
+		wrapper: {
+			height: "100%",
+			display: "flex",
+			justifyContent: "center",
+				alignItems: "center",
+		}
 	}),
 
 	input: StyleSheet.create({
@@ -390,17 +406,17 @@ const styles = {
 		},
 		h2: {
 			fontSize: REM(1.8),
-			color: stylevar.text.default,
+			color: stylevar.text.white,
+			fontWeight: "800",
 
-			fontFamily: "Inter-4"
+			fontFamily: "Overpass-bold",
 		},
 		h3: {
 			fontSize: REM(1.4),
-			color: stylevar.text.default,
-			textAlign: "center",
-			width: "100%",
+			color: stylevar.text.white,
+			fontWeight: "800",
 
-			fontFamily: "Inter-2"
+			fontFamily: "Overpass-bold",
 		},
 		p: {
 			fontSize: REM(1),
@@ -453,7 +469,7 @@ const styles = {
 
 		feedContainer: {
 			backgroundColor: stylevar.colors.bg,
-			width: width,
+			width: "100%",
 			flex: 10,
 
 			display: "flex",
@@ -757,7 +773,16 @@ const styles = {
 			fontSize: 34,
 			color: stylevar.text.light,
 			fontWeight: "800"
-		}
+		},
+		feedWrapper: {
+			marginTop: 20,
+			backgroundColor: stylevar.colors.bg,
+			borderRadius: 20,
+			padding: 10,
+			
+			...Default.shadow,
+			...Default.border,
+		},
 	}),
 };
 

@@ -78,7 +78,6 @@ export default function App() {
 						}}
 						sharedElements={(route, _, __) => {
 							const { profile } = route.params;
-							console.log(`profile-${profile} GET`)
 							return [`profile-${profile}`, "SharedComposeButton"];
 						}}
 					/>

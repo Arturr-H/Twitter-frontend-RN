@@ -17,7 +17,7 @@ class Button extends React.PureComponent {
     render() {
         return (
             <TouchableOpacity
-                style                = {styles.submitInput}
+                style                = {[styles.submitInput, this.props.noMargin && this.props.noMargin ? { marginBottom: 0 } : {}]}
                 onPress              = {() => {
                     this.props.onPress();
                     Haptic("medium");
